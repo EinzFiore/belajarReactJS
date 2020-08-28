@@ -26,7 +26,8 @@ class BlogPost extends Component {
     //   });
 
     // versi axios
-    axios.get("https://jsonplaceholder.typicode.com/posts").then((result) => {
+    // ubah url ke alamat url fake api
+    axios.get("http://localhost:3000/posts").then((result) => {
       this.setState({
         post: result.data,
       });
@@ -40,7 +41,7 @@ class BlogPost extends Component {
         <div className="container">
           <div className="jumbotron">
             {/* looping state menggunakan fungsi map lalu me return component <Post/> beserta props yang menerima data dari state post */}
-            {this.state.post.slice(0, 6).map((post) => {
+            {this.state.post.map((post) => {
               return (
                 <Post
                   key={post.id}
