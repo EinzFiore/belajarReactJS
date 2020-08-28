@@ -7,9 +7,9 @@ import HelloComponent from "./component/HelloComponent";
 // import StateFullComponent from "./container/StateFullComponent";
 import CardComponent from "./component/cardComponent/CardComponent";
 import Home from "./container/Home/Home";
-import Counter from "./container/Counter/Counter";
+// import Counter from "./container/Counter/Counter";
 
-ReactDOM.render(<Counter />, document.getElementById("root"));
+ReactDOM.render( < Home / > , document.getElementById("root"));
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
