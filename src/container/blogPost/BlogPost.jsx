@@ -12,6 +12,25 @@ class BlogPost extends Component {
     post: [],
   };
 
+  // Mendapatkan data Post dari API
+  getPostAPI = () => {
+    axios.get("http://localhost:3004/posts").then((result) => {
+      this.setState({
+        post: result.data,
+      });
+    });
+  };
+
+  // parameter (data) menerima data ID Post
+  handleRemove = (data) => {
+    axios.delete(`http://localhost:3004/posts/${data}`).then((res) => {
+      // melihat hasil dari aksi delete
+      console.log(res);
+      // setelah berhasil delete, akan diteruskan ke fungsi getPostAPI()
+      this.getPostAPI();
+    });
+  };
+
   // component ketika ingin di mount
   componentDidMount() {
     // versi fetch
@@ -27,11 +46,7 @@ class BlogPost extends Component {
 
     // versi axios
     // ubah url ke alamat url fake api
-    axios.get("http://localhost:3000/posts").then((result) => {
-      this.setState({
-        post: result.data,
-      });
-    });
+    this.getPostAPI();
   }
 
   render() {
@@ -41,12 +56,13 @@ class BlogPost extends Component {
         <div className="container">
           <div className="jumbotron">
             {/* looping state menggunakan fungsi map lalu me return component <Post/> beserta props yang menerima data dari state post */}
-            {this.state.post.map((post) => {
+            {this.state.post.slice(0, 4).map((post) => {
               return (
                 <Post
                   key={post.id}
-                  title={post.title}
-                  desc={post.body}
+                  data={post}
+                  // membuat props remove dengan menyimpan hasil dari aksi fungsi handleRemove.
+                  remove={this.handleRemove}
                   timePost="8/28/2020"
                 />
               );
